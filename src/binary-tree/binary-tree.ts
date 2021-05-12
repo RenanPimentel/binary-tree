@@ -6,7 +6,7 @@ export class BinaryTree<T> implements BinaryTreeProtocol<T> {
 
   constructor(public value: T) {}
 
-  insert(treeNode: BinaryTreeProtocol<T>): this {
+  public insert(treeNode: BinaryTreeProtocol<T>): this {
     if (treeNode.value > this.value) {
       if (this.right) {
         this.right.insert(treeNode);
@@ -24,23 +24,11 @@ export class BinaryTree<T> implements BinaryTreeProtocol<T> {
     return this;
   }
 
-  sort(sorted: T[] = []): T[] {
-    if (!this.left) {
-      sorted.push(this.value);
-      if (this.right) {
-        this.right.sort(sorted);
-      }
-      return sorted;
-    }
+  public sort(sortedArr: T[] = []): T[] {
+    this.left?.sort(sortedArr);
+    sortedArr.push(this.value);
+    this.right?.sort(sortedArr);
 
-    if (this.left) {
-      this.left.sort(sorted);
-    }
-
-    sorted.push(this.value);
-
-    this.right?.sort(sorted);
-
-    return sorted;
+    return sortedArr;
   }
 }

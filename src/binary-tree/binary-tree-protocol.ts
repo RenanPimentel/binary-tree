@@ -4,4 +4,5 @@ export interface BinaryTreeProtocol<T> {
   right: BinaryTreeProtocol<T> | null;
   insert(treeNode: BinaryTreeProtocol<T>): this;
   sort(sortedArr: T[]): T[];
+  search(searchValue: T): BinaryTreeProtocol<T> | null;
 }

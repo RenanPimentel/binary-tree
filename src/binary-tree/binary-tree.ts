@@ -6,7 +6,6 @@ export class BinaryTree<T> implements BinaryTreeProtocol<T> {
 
   constructor(public value: T) {}
 
-  // O=n
   public insert(treeNode: BinaryTreeProtocol<T>): this {
     if (treeNode.value > this.value) {
       if (this.right) {
@@ -25,12 +24,24 @@ export class BinaryTree<T> implements BinaryTreeProtocol<T> {
     return this;
   }
 
-  // O=n
   public sort(sortedArr: T[] = []): T[] {
     this.left?.sort(sortedArr);
     sortedArr.push(this.value);
     this.right?.sort(sortedArr);
 
     return sortedArr;
+  }
+
+  search(searchValue: T): BinaryTreeProtocol<T> | null {
+    if (this.value === searchValue) return this;
+    let searchedNode = null;
+
+    if (searchValue > this.value) {
+      searchedNode = this.right?.search(searchValue) ?? null;
+    } else {
+      searchedNode = this.left?.search(searchValue) ?? null;
+    }
+
+    return searchedNode;
   }
 }

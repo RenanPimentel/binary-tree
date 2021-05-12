@@ -1,39 +1,23 @@
 import { BinaryTreeProtocol } from './binary-tree-protocol';
 
 export class BinaryTree<T> implements BinaryTreeProtocol<T> {
-  private _left?: BinaryTreeProtocol<T>;
-  private _right?: BinaryTreeProtocol<T>;
+  public left: BinaryTreeProtocol<T> | null = null;
+  public right: BinaryTreeProtocol<T> | null = null;
 
   constructor(public value: T) {}
-
-  public get left(): BinaryTreeProtocol<T> | undefined {
-    return this._left;
-  }
-
-  public get right(): BinaryTreeProtocol<T> | undefined {
-    return this._right;
-  }
-
-  private setRight(node: BinaryTreeProtocol<T> | undefined) {
-    this._right = node;
-  }
-
-  private setLeft(node: BinaryTreeProtocol<T> | undefined) {
-    this._left = node;
-  }
 
   insert(treeNode: BinaryTreeProtocol<T>): this {
     if (treeNode.value > this.value) {
       if (this.right) {
         this.right.insert(treeNode);
       } else {
-        this.setRight(treeNode);
+        this.right = treeNode;
       }
     } else if (treeNode.value < this.value) {
       if (this.left) {
         this.left.insert(treeNode);
       } else {
-        this.setLeft(treeNode);
+        this.left = treeNode;
       }
     }
 
